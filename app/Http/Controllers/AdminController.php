@@ -54,8 +54,6 @@ class AdminController extends Controller
 
         Admin::create($formFields);
 
-        // dd($formFields['name']);
-
         return redirect('/admin')->with('message', 'Admin ' . $formFields['name'] . ' created successfully!');
     }
 
