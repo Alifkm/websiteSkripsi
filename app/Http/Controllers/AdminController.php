@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Unique;
 
 class AdminController extends Controller
 {
@@ -46,14 +47,16 @@ class AdminController extends Controller
         //
         $formFields = $request->validate([
             'name' => 'required',
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:admins'],
             'password' => 'required',
             'confirmPassword' => 'required'
         ]); 
 
         Admin::create($formFields);
 
-        return redirect('/admin');
+        // dd($formFields['name']);
+
+        return redirect('/admin')->with('message', 'Admin ' . $formFields['name'] . ' created successfully!');
     }
 
     /**
@@ -65,6 +68,7 @@ class AdminController extends Controller
     public function show(Admin $admin)
     {
         //
+        return view('admins.show');
     }
 
     /**
@@ -76,6 +80,7 @@ class AdminController extends Controller
     public function edit(Admin $admin)
     {
         //
+        return view('admins.edit', ['admin' => $admin]);
     }
 
     /**
@@ -88,6 +93,16 @@ class AdminController extends Controller
     public function update(Request $request, Admin $admin)
     {
         //
+        $formFields = $request->validate([
+            'name' => 'required',
+            'email' => ['required', 'email'],
+            'password' => 'required',
+            'confirmPassword' => 'required'
+        ]); 
+
+        $admin->update($formFields);
+
+        return redirect('/admin')->with('message', 'Admin ' . $formFields['name'] . ' updated successfully!');
     }
 
     /**
@@ -99,5 +114,7 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         //
+        $admin->delete();
+        return redirect('/admin')->with('message', 'Admin ' . $admin['name'] . ' deleted successfully!');        
     }
 }
