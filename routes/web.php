@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,24 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// all admin
+Route::get('/admin', [AdminController::class, 'index']);
+
+// create admin form
+Route::get('/admin/create', [AdminController::class, 'create']);
+
+// store admin data
+Route::post('/admin', [AdminController::class, 'store']);
+
+// show admin edit form
+Route::get('/admin/{admin}/edit', [AdminController::class, 'edit']);
+
+// update admin data
+Route::put('/admin/{admin}', [AdminController::class, 'update']);
+
+// delete admin data
+Route::delete('/admin/{admin}', [AdminController::class, 'destroy']);
 
 Auth::routes();
 
