@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,25 @@ Route::put('/admin/{admin}', [AdminController::class, 'update']);
 
 // delete admin data
 Route::delete('/admin/{admin}', [AdminController::class, 'destroy']);
+
+// all employee
+Route::get('/employee', [EmployeeController::class, 'index']);
+
+// create employee form
+Route::get('/employee/create', [EmployeeController::class, 'create']);
+
+// store employee data
+Route::post('/employee', [EmployeeController::class, 'store']);
+
+// show employee edit form
+Route::get('/employee/{employee}/edit', [EmployeeController::class, 'edit']);
+
+// update employee data
+Route::put('/employee/{employee}', [EmployeeController::class, 'update']);
+
+// delete admin data
+Route::delete('/employee/{employee}', [EmployeeController::class, 'destroy']);
+
 
 Auth::routes();
 
