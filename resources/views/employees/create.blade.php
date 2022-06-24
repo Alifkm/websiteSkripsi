@@ -60,7 +60,7 @@
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="/admin"><button type="button" class="btn btn-primary mx-2">Cancel</button></a>
+                    <a href="/employee"><button type="button" class="btn btn-primary mx-2">Cancel</button></a>
                 </div>
             </form>
         </div>

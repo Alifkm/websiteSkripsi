@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EmployeeController;
+use App\Models\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,10 +56,27 @@ Route::get('/employee/{employee}/edit', [EmployeeController::class, 'edit']);
 // update employee data
 Route::put('/employee/{employee}', [EmployeeController::class, 'update']);
 
-// delete admin data
+// delete employee data
 Route::delete('/employee/{employee}', [EmployeeController::class, 'destroy']);
 
+// all employee
+Route::get('/project', [ProjectController::class, 'index']);
+
+// create project form
+Route::get('/project/create', [ProjectController::class, 'create']);
+
+// store project data
+Route::post('/project', [ProjectController::class, 'store']);
+
+// show project edit form
+Route::get('/project/{project}/edit', [ProjectController::class, 'edit']);
+
+// update project data
+Route::put('/project/{project}', [ProjectController::class, 'update']);
+
+// delete project data
+Route::delete('/project/{project}', [ProjectController::class, 'destroy']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
