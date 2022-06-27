@@ -3,14 +3,15 @@
 @section('content')
     <div class="container d-flex flex-column bg-light">
         <div>
-            <h1 class="mb-5">Add new income</h1>
+            <h1 class="mb-5">Edit outcome</h1>
         </div>
         <div>
-            <form method="POST" action="/income">
+            <form method="POST" action="/outcome/{{ $outcome->id }}">
                 @csrf
+                @method('PUT')
                 <div class="mb-3 w-25">
                     <label for="transaction_name" class="form-label">Transaction Name</label>
-                    <input type="text" name="transaction_name" class="form-control" id="transaction_name" value="{{ old('transaction_name') }}">
+                    <input type="text" name="transaction_name" class="form-control" id="transaction_name" value="{{ $outcome->transaction_name }}">
                     @error('transaction_name')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -28,21 +29,21 @@
                 </div>
                 <div class="mb-3 w-25">
                   <label for="date" class="form-label">Date</label>
-                  <input type="date" name="date" class="form-control" id="date" value="{{ old('date') }}">
+                  <input type="date" name="date" class="form-control" id="date" value="{{ $outcome->date }}">
                   @error('date')
                       <p class="text-danger">{{ $message }}</p>
                   @enderror
-              </div>
+                </div>
                 <div class="mb-3 w-25">
                     <label for="total" class="form-label">Total</label>
-                    <input type="text" name="total" class="form-control" id="total" value="{{ old('total') }}">
+                    <input type="text" name="total" class="form-control" id="total" value="{{ $outcome->total }}">
                     @error('total')
                         <p class="text-danger">{{ $message }}</p>
                 @enderror
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
-                    <a href="/income"><button type="button" class="btn btn-outline-secondary mx-2">Cancel</button></a>
+                    <a href="/outcome"><button type="button" class="btn btn-outline-secondary mx-2">Cancel</button></a>
                 </div>
             </form>
         </div>
