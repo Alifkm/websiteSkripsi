@@ -1,12 +1,13 @@
 <?php
 
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EmployeeController;
-use App\Models\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,7 @@ Route::put('/employee/{employee}', [EmployeeController::class, 'update']);
 // delete employee data
 Route::delete('/employee/{employee}', [EmployeeController::class, 'destroy']);
 
-// all employee
+// all project
 Route::get('/project', [ProjectController::class, 'index']);
 
 // create project form
@@ -76,6 +77,24 @@ Route::put('/project/{project}', [ProjectController::class, 'update']);
 
 // delete project data
 Route::delete('/project/{project}', [ProjectController::class, 'destroy']);
+
+// all income
+Route::get('/income', [IncomeController::class, 'index']);
+
+// create income form
+Route::get('/income/create', [IncomeController::class, 'create']);
+
+// store income data
+Route::post('/income', [IncomeController::class, 'store']);
+
+// show income edit form
+Route::get('/income/{income}/edit', [IncomeController::class, 'edit']);
+
+// update income data
+Route::put('/income/{income}', [IncomeController::class, 'update']);
+
+// delete income data
+Route::delete('/income/{income}', [IncomeController::class, 'destroy']);
 
 Auth::routes();
 

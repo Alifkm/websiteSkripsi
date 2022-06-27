@@ -12,7 +12,7 @@ class TransactionSource extends Model
     protected $table ='transaction_sources';
 
     public function transaction(){
-        return $this->belongsTo(Transaction::class);
+        return $this->hasOne(Transaction::class);
     }
 
     protected $fillable =['transaction_source_name'];

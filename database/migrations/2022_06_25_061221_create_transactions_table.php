@@ -14,15 +14,25 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('transaction_type_id')
-                    ->constrained('transaction_types');
-            $table->foreignId('transaction_source_id')
-                    ->constrained('transaction_sources');
+            $table->increments('id');
+            $table->integer('transaction_type_id')->unsigned();
+            $table->integer('transaction_source_id')->unsigned();
             $table->string('transaction_name');
             $table->date('date');
             $table->bigInteger('total');
             $table->timestamps();
+        });
+
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->foreign('transaction_type_id')
+                ->references('id')
+                ->on('transaction_types');
+        });
+
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->foreign('transaction_source_id')
+                ->references('id')
+                ->on('transaction_sources');
         });
     }
 

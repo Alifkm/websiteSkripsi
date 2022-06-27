@@ -13,19 +13,20 @@ class Transaction extends Model
 
     protected $table ='transactions';
 
-    public function transactionType(){
-        return $this->hasOne(TransactionType::class);
-    }
-
-    public function transactionSource(){
-        return $this->hasOne(TransactionSource::class);
-    }
-
     public function scopeFilter($query, array $filters) {
         if($filters['search'] ?? false) {
-            $query->where('transaction_name', 'like', '%' . request('search') . '%');
+            $query->where('transaction_name', 'like', '%' . request('search') . '%')
+                    ->orWhere('date', 'like', '%' . request('search') . '%');
         }
     }
 
-    protected $fillable =['transaction_name', 'date', 'total'];
+    public function transactionTypes(){
+        return $this->belongsTo(TransactionType::class, 'transaction_type_id');
+    }
+
+    public function transaction_sources(){
+        return $this->belongsTo(TransactionSource::class, 'transaction_source_id');
+    }
+
+    protected $fillable =['transaction_type_id', 'transaction_source_id', 'transaction_name', 'date', 'total'];
 }
