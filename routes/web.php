@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\OutcomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EmployeeController;
 
@@ -95,6 +96,25 @@ Route::put('/income/{income}', [IncomeController::class, 'update']);
 
 // delete income data
 Route::delete('/income/{income}', [IncomeController::class, 'destroy']);
+
+
+// all outcome
+Route::get('/outcome', [OutcomeController::class, 'index']);
+
+// create outcome form
+Route::get('/outcome/create', [OutcomeController::class, 'create']);
+
+// store outcome data
+Route::post('/outcome', [OutcomeController::class, 'store']);
+
+// show outcome edit form
+Route::get('/outcome/{outcome}/edit', [OutcomeController::class, 'edit']);
+
+// update outcome data
+Route::put('/outcome/{outcome}', [OutcomeController::class, 'update']);
+
+// delete outcome data
+Route::delete('/outcome/{outcome}', [OutcomeController::class, 'destroy']);
 
 Auth::routes();
 
