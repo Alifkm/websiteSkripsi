@@ -12,7 +12,7 @@ class TransactionType extends Model
     protected $table ='transaction_types';
 
     public function transaction(){
-        return $this->belongsTo(Transaction::class);
+        return $this->hasOne(Transaction::class);
     }
 
     protected $fillable =['transaction_type_name'];

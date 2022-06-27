@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transaction_sources', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('transaction_source_name');
             $table->timestamps();
         });

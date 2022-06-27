@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\TransactionSeeder;
 use Database\Seeders\TransactionTypeSeeder;
 use Database\Seeders\TransactionSourceSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(TransactionTypeSeeder::class);
         $this->call(TransactionSourceSeeder::class);
+        $this->call(TransactionSeeder::class);
     }
 }
