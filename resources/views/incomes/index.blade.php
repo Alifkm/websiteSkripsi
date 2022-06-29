@@ -15,7 +15,7 @@
                 <button class="btn btn-outline-success me-2" type="submit">Search</button>
                 <a href="/project"><button class="btn btn-outline-warning" type="submit">Reset</button></a>
             </form>
-            <a href="/project/create"><button type="button" class="btn btn-outline-secondary">Create</button></a> 
+            <a href="/income/create"><button type="button" class="btn btn-outline-secondary">Create</button></a> 
         </div>
         <table class="table table-striped table-hover">
             <thead>
@@ -35,7 +35,7 @@
                         <td>{{ $income->transaction_name }}</td>
                         <td>{{ $income->transaction_sources->transaction_source_name }}</td>
                         <td>{{ $income->date }}</td>    
-                        <td>{{ $income->total }}</td>
+                        <td>{{ number_format($income->total , 0, ',', '.') }}</td>
                         <td class="d-flex">
                             <a class="me-2" href="/income/{{ $income->id }}/edit"><button type="button" class="btn btn-outline-success">Edit</button></a> 
                             <form action="/income/{{ $income->id }}" method="POST">

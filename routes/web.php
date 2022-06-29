@@ -9,6 +9,7 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\OutcomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,7 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index']);
 
 // all admin
 Route::get('/admin', [AdminController::class, 'index']);
@@ -115,6 +114,13 @@ Route::put('/outcome/{outcome}', [OutcomeController::class, 'update']);
 
 // delete outcome data
 Route::delete('/outcome/{outcome}', [OutcomeController::class, 'destroy']);
+
+// dashboard
+Route::post('/dashboard', [DashboardController::class, 'search']);
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/chart', [DashboardController::class, 'chart']);
 
 Auth::routes();
 

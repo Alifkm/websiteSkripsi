@@ -37,7 +37,7 @@
                         <th scope="row">{{ $count++ }}</th>
                         <td>{{ $project->name }}</td>
                         <td>{{ $project->location }}</td>
-                        <td>{{ $project->start_date }}</td>
+                        <td>{{ $project->start_date }} </td>
                         <td>{{ $project->end_date }}</td>
                         <td class="d-flex">
                             <a class="me-2" href="/project/{{ $project->id }}/edit"><button type="button" class="btn btn-outline-success">Edit</button></a> 
