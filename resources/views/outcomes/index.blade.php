@@ -35,7 +35,7 @@
                         <td>{{ $outcome->transaction_name }}</td>
                         <td>{{ $outcome->transaction_sources->transaction_source_name }}</td>
                         <td>{{ $outcome->date }}</td>    
-                        <td>{{ $outcome->total }}</td>
+                        <td>{{ number_format($outcome->total , 0, ',', '.') }}</td>
                         <td class="d-flex">
                             <a class="me-2" href="/outcome/{{ $outcome->id }}/edit"><button type="button" class="btn btn-outline-success">Edit</button></a> 
                             <form action="/outcome/{{ $outcome->id }}" method="POST">
