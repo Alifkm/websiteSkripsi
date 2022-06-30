@@ -15,7 +15,9 @@
                 <button class="btn btn-outline-success me-2" type="submit">Search</button>
                 <a href="/admin/"><button class="btn btn-outline-warning" type="submit">Reset</button></a>
             </form>
-            <a href="/admin/create/"><button type="button" class="btn btn-outline-secondary">Create</button></a> 
+            @can('thisIsSuperAdmin')
+                <a href="/admin/create/"><button type="button" class="btn btn-outline-secondary">Create</button></a> 
+            @endcan 
         </div>
         <table class="table table-striped table-hover">
             <thead>
@@ -23,7 +25,9 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Action</th>
+                @can('thisIsSuperAdmin')
+                    <th scope="col">Action</th>
+                @endcan
             </tr>
             </thead>
             <tbody>
@@ -36,12 +40,14 @@
                         <td id="adminName">{{ $admin->name }}</td>
                         <td>{{ $admin->email }}</td>
                         <td class="d-flex">
-                            <a class="me-2" href="/admin/{{ $admin->id }}/edit"><button type="button" class="btn btn-outline-success">Edit</button></a> 
-                            <form action="/admin/{{ $admin->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-outline-danger show-alert-delete-box">Delete</button>
-                            </form>
+                            @can('thisIsSuperAdmin') 
+                                <a class="me-2" href="/admin/{{ $admin->id }}/edit"><button type="button" class="btn btn-outline-success">Edit</button></a> 
+                                <form action="/admin/{{ $admin->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-outline-danger show-alert-delete-box">Delete</button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

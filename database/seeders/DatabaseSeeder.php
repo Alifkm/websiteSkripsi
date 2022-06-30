@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\AdminTypeSeeder;
 use Database\Seeders\TransactionSeeder;
 use Database\Seeders\TransactionTypeSeeder;
 use Database\Seeders\TransactionSourceSeeder;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call(AdminTypeSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(TransactionTypeSeeder::class);
         $this->call(TransactionSourceSeeder::class);

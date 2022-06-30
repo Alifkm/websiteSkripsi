@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Unique;
 
 class AdminController extends Controller
@@ -49,10 +50,19 @@ class AdminController extends Controller
             'name' => 'required',
             'email' => ['required', 'email', 'unique:admins'],
             'password' => 'required',
-            'confirmPassword' => 'required'
+            'confirmPassword' => 'required',
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:12', 'min:10']
         ]); 
 
-        Admin::create($formFields);
+        Admin::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'admin_type_id' => 2,
+            'password' => $request->password,
+            'phone' => $request->phone,
+        ]);
+
+        // Admin::create($formFields);
 
         return redirect('/admin')->with('message', 'Admin ' . $formFields['name'] . ' created successfully!');
     }
@@ -66,7 +76,6 @@ class AdminController extends Controller
     public function show(Admin $admin)
     {
         //
-        return view('admins.show');
     }
 
     /**
@@ -95,7 +104,8 @@ class AdminController extends Controller
             'name' => 'required',
             'email' => ['required', 'email'],
             'password' => 'required',
-            'confirmPassword' => 'required'
+            'confirmPassword' => 'required',
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:12', 'min:10']
         ]); 
 
         $admin->update($formFields);

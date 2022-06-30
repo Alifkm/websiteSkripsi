@@ -36,6 +36,13 @@
                         <p class="text-danger">{{ $message }}</p>
                 @enderror
                 </div>
+                <div class="mb-3 w-25">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" name="phone" class="form-control" id="phone" value="{{ old('phone') }}">
+                    @error('phone')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                  </div>
                 <div class="d-flex">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="/admin"><button type="button" class="btn btn-primary mx-2">Cancel</button></a>

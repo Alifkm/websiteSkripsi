@@ -22,106 +22,60 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
-// all admin
-Route::get('/admin', [AdminController::class, 'index']);
-
-// create admin form
-Route::get('/admin/create', [AdminController::class, 'create']);
-
-// store admin data
-Route::post('/admin', [AdminController::class, 'store']);
-
-// show admin edit form
-Route::get('/admin/{admin}/edit', [AdminController::class, 'edit']);
-
-// update admin data
-Route::put('/admin/{admin}', [AdminController::class, 'update']);
-
-// delete admin data
-Route::delete('/admin/{admin}', [AdminController::class, 'destroy']);
-
-// all employee
-Route::get('/employee', [EmployeeController::class, 'index']);
-
-// create employee form
-Route::get('/employee/create', [EmployeeController::class, 'create']);
-
-// store employee data
-Route::post('/employee', [EmployeeController::class, 'store']);
-
-// show employee edit form
-Route::get('/employee/{employee}/edit', [EmployeeController::class, 'edit']);
-
-// update employee data
-Route::put('/employee/{employee}', [EmployeeController::class, 'update']);
-
-// delete employee data
-Route::delete('/employee/{employee}', [EmployeeController::class, 'destroy']);
-
-// all project
-Route::get('/project', [ProjectController::class, 'index']);
-
-// create project form
-Route::get('/project/create', [ProjectController::class, 'create']);
-
-// store project data
-Route::post('/project', [ProjectController::class, 'store']);
-
-// show project edit form
-Route::get('/project/{project}/edit', [ProjectController::class, 'edit']);
-
-// update project data
-Route::put('/project/{project}', [ProjectController::class, 'update']);
-
-// delete project data
-Route::delete('/project/{project}', [ProjectController::class, 'destroy']);
-
-// all income
-Route::get('/income', [IncomeController::class, 'index']);
-
-// create income form
-Route::get('/income/create', [IncomeController::class, 'create']);
-
-// store income data
-Route::post('/income', [IncomeController::class, 'store']);
-
-// show income edit form
-Route::get('/income/{income}/edit', [IncomeController::class, 'edit']);
-
-// update income data
-Route::put('/income/{income}', [IncomeController::class, 'update']);
-
-// delete income data
-Route::delete('/income/{income}', [IncomeController::class, 'destroy']);
+Route::controller(AdminController::class)->group(function() {
+  Route::get('/admin', 'index')->middleware('auth'); // all admin
+  Route::get('/admin/create', 'create')->middleware(['thisIsSuperAdmin', 'auth']); // create admin form
+  Route::post('/admin', 'store')->middleware(['thisIsSuperAdmin', 'auth']); // store admin data
+  Route::get('/admin/{admin}/edit', 'edit')->middleware(['thisIsSuperAdmin', 'auth']); // show admin edit form
+  Route::put('/admin/{admin}', 'update')->middleware(['thisIsSuperAdmin', 'auth']); // update admin data
+  Route::delete('/admin/{admin}', 'destroy')->middleware(['thisIsSuperAdmin', 'auth']); // delete admin data
+});
 
 
-// all outcome
-Route::get('/outcome', [OutcomeController::class, 'index']);
+Route::controller(EmployeeController::class)->group(function() {
+  Route::get('/employee', 'index')->middleware('auth'); // all employee
+  Route::get('/employee/create', 'create')->middleware('auth'); // create employee form
+  Route::post('/employee', 'store')->middleware('auth'); // store employee data
+  Route::get('/employee/{employee}/edit', 'edit')->middleware('auth'); // show employee edit form
+  Route::put('/employee/{employee}', 'update')->middleware('auth'); // update employee data
+  Route::delete('/employee/{employee}', 'destroy')->middleware('auth'); // delete employee data
+});
 
-// create outcome form
-Route::get('/outcome/create', [OutcomeController::class, 'create']);
 
-// store outcome data
-Route::post('/outcome', [OutcomeController::class, 'store']);
+Route::controller(ProjectController::class)->group(function() {
+  Route::get('/project', 'index')->middleware('auth'); // all project
+  Route::get('/project/create', 'create')->middleware('auth'); // create project form
+  Route::post('/project', 'store')->middleware('auth'); // store project data
+  Route::get('/project/{project}/edit', 'edit')->middleware('auth'); // show project edit form
+  Route::put('/project/{project}', 'update')->middleware('auth'); // update project data
+  Route::delete('/project/{project}', 'destroy')->middleware('auth'); // delete project data
+});
 
-// show outcome edit form
-Route::get('/outcome/{outcome}/edit', [OutcomeController::class, 'edit']);
+Route::controller(IncomeController::class)->group(function() {
+  Route::get('/income', 'index')->middleware('auth'); // all income
+  Route::get('/income/create', 'create')->middleware('auth'); // create income form 
+  Route::post('/income', 'store')->middleware('auth'); // store income data
+  Route::get('/income/{income}/edit', 'edit')->middleware('auth'); // show income edit form
+  Route::put('/income/{income}', 'update')->middleware('auth'); // update income data
+  Route::delete('/income/{income}', 'destroy')->middleware('auth'); // delete income data
+});
 
-// update outcome data
-Route::put('/outcome/{outcome}', [OutcomeController::class, 'update']);
+Route::controller(OutcomeController::class)->group(function() {
+  Route::get('/outcome', 'index')->middleware('auth'); // all outcome
+  Route::get('/outcome/create', 'create')->middleware('auth'); // create outcome form
+  Route::post('/outcome', 'store')->middleware('auth'); // store outcome data
+  Route::get('/outcome/{outcome}/edit', 'edit')->middleware('auth'); // show outcome edit form
+  Route::put('/outcome/{outcome}', 'update')->middleware('auth'); // update outcome data
+  Route::delete('/outcome/{outcome}', 'destroy')->middleware('auth'); // delete outcome data
 
-// delete outcome data
-Route::delete('/outcome/{outcome}', [OutcomeController::class, 'destroy']);
+});
 
-// dashboard
-Route::post('/dashboard', [DashboardController::class, 'search']);
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
-
-Route::get('/chart', [DashboardController::class, 'chart']);
+Route::controller(DashboardController::class)->group(function() {
+  Route::post('/dashboard', 'search')->middleware('auth'); // search dashboard
+  Route::get('/dashboard', 'index')->middleware('auth'); // dashboard
+  Route::get('/chart', 'chart')->middleware('auth'); // chart
+});
 
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

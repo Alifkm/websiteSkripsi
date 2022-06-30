@@ -1,6 +1,19 @@
 <?php
 
+use App\Models\Admin;
+
 return [
+
+    // 'admins' => [
+    //     'driver' => 'eloquent',
+    //     'model' => Admin::class,
+    // ],
+
+    // 'admins' => [
+    //     'provider' => 'admins',
+    //     'table' => 'password_resets',
+    //     'expire' => 60,
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -15,7 +28,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'admins',
     ],
 
     /*
@@ -38,7 +51,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'admins',
         ],
     ],
 
@@ -60,9 +73,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => Admin::class,
         ],
 
         // 'users' => [
@@ -87,8 +100,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'admins' => [
+            'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
