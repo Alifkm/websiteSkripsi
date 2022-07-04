@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('transaction_name');
             $table->date('date');
             $table->bigInteger('total');
+            $table->string('created_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
 

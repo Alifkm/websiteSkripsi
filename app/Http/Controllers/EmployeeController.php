@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\PositionType;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -16,7 +17,7 @@ class EmployeeController extends Controller
     {
         //
         return view('employees.index', [
-            'employees' => Employee::latest()->filter(request(['search']))->paginate(10)
+            'employees' => Employee::latest()->filter(request(['search']))->with('position')->paginate(10)
         ]);
 
         // return view('employees.index', [
@@ -32,7 +33,9 @@ class EmployeeController extends Controller
     public function create()
     {
         //
-        return view('employees.create');
+        return view('employees.create', [
+            'positions' => PositionType::all()
+        ]);
     }
 
     /**
@@ -54,7 +57,16 @@ class EmployeeController extends Controller
             'address' => 'required'
         ]); 
 
-        Employee::create($formFields);
+        Employee::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'gender' => $request->gender,
+            'position_type_id' => $request->position,
+            'age' => $request->age,
+            'address' => $request->address
+        ]);
+
 
         return redirect('/employee')->with('message', 'Employee ' . $formFields['name'] . ' created successfully!');
 
@@ -80,7 +92,10 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         //
-        return view('employees.edit', ['employee' => $employee]);
+        return view('employees.edit', [
+            'employee' => $employee,
+            'positions' => PositionType::all()
+        ]);
     }
 
     /**
@@ -101,10 +116,18 @@ class EmployeeController extends Controller
             'position' => 'required',
             'age' => 'required',
             'address' => 'required'
+        ]); 
+
+        $employee->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'gender' => $request->gender,
+            'position_type_id' => $request->position,
+            'age' => $request->age,
+            'address' => $request->address
         ]);
-
-        $employee->update($formFields);
-
+        
         return redirect('/employee')->with('message', 'Employee ' . $formFields['name'] . ' updated successfully!');
     }
 

@@ -21,7 +21,9 @@ class TransactionSeeder extends Seeder
             'transaction_type_id' => 1,
             'transaction_source_id' => 1,
             'date' => '2022-04-21',
-            'total' => 210000000
+            'total' => 210000000,
+            'created_by' => 'admin1',
+            'updated_by' => 'admin1'
         ]);
 
         DB::table('transactions')->insert([
@@ -29,7 +31,9 @@ class TransactionSeeder extends Seeder
             'transaction_type_id' => 1,
             'transaction_source_id' => 1,
             'date' => '2022-05-01',
-            'total' => 500000000
+            'total' => 500000000,
+            'created_by' => 'admin1',
+            'updated_by' => 'admin1'
         ]);
 
         DB::table('transactions')->insert([
@@ -37,7 +41,9 @@ class TransactionSeeder extends Seeder
             'transaction_type_id' => 2,
             'transaction_source_id' => 9,
             'date' => '2022-05-20',
-            'total' => 1000000
+            'total' => 1000000,
+            'created_by' => 'admin1',
+            'updated_by' => 'admin1'
         ]);
 
         DB::table('transactions')->insert([
@@ -45,7 +51,9 @@ class TransactionSeeder extends Seeder
             'transaction_type_id' => 2,
             'transaction_source_id' => 10,
             'date' => '2022-06-10',
-            'total' => 5000000
+            'total' => 5000000,
+            'created_by' => 'admin1',
+            'updated_by' => 'admin1'
         ]);
     }
 }

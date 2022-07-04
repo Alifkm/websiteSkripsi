@@ -6,7 +6,7 @@
             <h1 class="mb-5">Add new income</h1>
         </div>
         <div>
-            <form method="POST" action="/income">
+            <form method="POST" action="/income" autocomplete="off">
                 @csrf
                 <div class="mb-3 w-25">
                     <label for="transaction_name" class="form-label">Transaction Name</label>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
-                    <a href="/income"><button type="button" class="btn btn-outline-secondary mx-2">Cancel</button></a>
+                    <a href="/income"><button type="button" class="btn btn-outline-danger mx-2">Cancel</button></a>
                 </div>
             </form>
         </div>

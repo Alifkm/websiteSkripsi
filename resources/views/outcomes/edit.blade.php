@@ -5,8 +5,26 @@
         <div>
             <h1 class="mb-5">Edit outcome</h1>
         </div>
+        <div class="d-flex justify-content-center">
+          <div class="mb-3 w-25 d-flex flex-column">
+              <label for="name" class="form-label">Created by</label>
+              <span>{{ $outcome->created_by }}</span>
+          </div>
+          <div class="mb-3 w-25 d-flex flex-column">
+              <label for="name" class="form-label">Created date</label>
+              <span>{{ date('d M Y', strtotime($outcome->created_at)) }}</span>
+          </div>
+          <div class="mb-3 w-25 d-flex flex-column">
+              <label for="name" class="form-label">Last Updated By</label>
+              <span>{{ $outcome->updated_by }}</span>
+          </div>
+          <div class="mb-3 w-25 d-flex flex-column">
+              <label for="name" class="form-label">Last Updated Date</label>
+              <span>{{ date('d M Y', strtotime($outcome->updated_at)) }}</span>
+          </div>
+      </div>
         <div>
-            <form method="POST" action="/outcome/{{ $outcome->id }}">
+            <form method="POST" action="/outcome/{{ $outcome->id }}" autocomplete="off">
                 @csrf
                 @method('PUT')
                 <div class="mb-3 w-25">
@@ -43,7 +61,7 @@
                 </div>
                 <div class="d-flex">
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
-                    <a href="/outcome"><button type="button" class="btn btn-outline-secondary mx-2">Cancel</button></a>
+                    <a href="/outcome"><button type="button" class="btn btn-outline-danger mx-2">Cancel</button></a>
                 </div>
             </form>
         </div>

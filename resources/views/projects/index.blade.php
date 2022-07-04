@@ -1,15 +1,8 @@
 @extends('layouts/app')
 
-@if ($message = Session::get('warning'))
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>{{ $message }}</strong>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
-
 @section('content')
     <div class="container-fluid">
-        <div class="d-flex justify-content-around">
+        <div class="d-flex justify-content-around mb-5">
             <form class="d-flex mb-10" action="/project">
                 <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success me-2" type="submit">Search</button>
@@ -17,44 +10,47 @@
             </form>
             <a href="/project/create"><button type="button" class="btn btn-outline-secondary">Create</button></a> 
         </div>
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-                @php
-                 $count = 1; 
-                @endphp
-                @foreach ($projects as $project)
-                    <tr>
-                        <th scope="row">{{ $count++ }}</th>
-                        <td>{{ $project->name }}</td>
-                        <td>{{ $project->location }}</td>
-                        <td>{{ $project->start_date }} </td>
-                        <td>{{ $project->end_date }}</td>
-                        <td class="d-flex">
-                            <a class="me-2" href="/project/{{ $project->id }}/edit"><button type="button" class="btn btn-outline-success">Edit</button></a> 
-                            <form action="/project/{{ $project->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-outline-danger show-alert-delete-box">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table> 
-        
-        <div class="d-flex justify-content-center">
-            {!! $projects->appends(['sort' => 'name'])->links() !!}
-        </div>
+        @if (count($projects) < 1)
+            <div class="d-flex justify-content-center">
+                <h2>There is no data!</h2>
+            </div>
+        @else
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($projects as $project)
+                        <tr>
+                            <th scope="row">{{ $projects->firstItem() + $loop->index }}</th>
+                            <td>{{ $project->name }}</td>
+                            <td>{{ date('d M Y', strtotime($project->start_date)) }} </td>
+                            <td>{{ date('d M Y', strtotime($project->end_date)) }}</td>
+                            <td>{{ $project->status }}</td>
+                            <td class="d-flex">
+                                <a class="me-2" href="/project/{{ $project->id }}/edit"><button type="button" class="btn btn-outline-success">Edit</button></a> 
+                                <form action="/project/{{ $project->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-outline-danger show-alert-delete-box">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table> 
+            
+            <div class="d-flex justify-content-center">
+                {!! $projects->appends(['sort' => 'name'])->links() !!}
+            </div>
+        @endif
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\OutcomeController;
 use App\Http\Controllers\ProjectController;
@@ -23,6 +24,14 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+
+
+Route::controller(DashboardController::class)->group(function() {
+  Route::post('/dashboard', 'search')->middleware('auth'); // search dashboard
+  Route::get('/dashboard', 'index')->middleware('auth'); // dashboard
+  Route::get('/chart', 'chart')->middleware('auth'); // chart
+});
+
 
 Route::controller(AdminController::class)->group(function() {
   Route::get('/admin', 'index')->middleware('auth'); // all admin
@@ -53,6 +62,7 @@ Route::controller(ProjectController::class)->group(function() {
   Route::delete('/project/{project}', 'destroy')->middleware('auth'); // delete project data
 });
 
+
 Route::controller(IncomeController::class)->group(function() {
   Route::get('/income', 'index')->middleware('auth'); // all income
   Route::get('/income/create', 'create')->middleware('auth'); // create income form 
@@ -72,10 +82,9 @@ Route::controller(OutcomeController::class)->group(function() {
 
 });
 
-Route::controller(DashboardController::class)->group(function() {
-  Route::post('/dashboard', 'search')->middleware('auth'); // search dashboard
-  Route::get('/dashboard', 'index')->middleware('auth'); // dashboard
-  Route::get('/chart', 'chart')->middleware('auth'); // chart
+Route::controller(ChangePasswordController::class)->group(function() {
+  Route::get('/change-password', 'index')->middleware('auth'); // show password
+  Route::post('/change-password', 'changePassword')->middleware('auth'); // create outcome form
 });
 
 Auth::routes();

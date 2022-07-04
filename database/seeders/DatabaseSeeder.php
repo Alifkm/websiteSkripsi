@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(AdminTypeSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(PositionTypeSeeder::class);
         $this->call(TransactionTypeSeeder::class);
         $this->call(TransactionSourceSeeder::class);
         $this->call(TransactionSeeder::class);

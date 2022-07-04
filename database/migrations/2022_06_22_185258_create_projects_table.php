@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('price');
             $table->string('status');
             $table->longText('description');
+            $table->string('created_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
     }

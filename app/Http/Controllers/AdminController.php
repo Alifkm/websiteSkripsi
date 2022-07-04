@@ -49,8 +49,7 @@ class AdminController extends Controller
         $formFields = $request->validate([
             'name' => 'required',
             'email' => ['required', 'email', 'unique:admins'],
-            'password' => 'required',
-            'confirmPassword' => 'required',
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:12', 'min:10']
         ]); 
 
@@ -104,7 +103,6 @@ class AdminController extends Controller
             'name' => 'required',
             'email' => ['required', 'email'],
             'password' => 'required',
-            'confirmPassword' => 'required',
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:12', 'min:10']
         ]); 
 
