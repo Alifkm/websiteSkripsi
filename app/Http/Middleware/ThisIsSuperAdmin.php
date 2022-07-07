@@ -20,6 +20,6 @@ class ThisIsSuperAdmin
             return $next($request);
         }
 
-        return response()->view('dashboard.index');
+        return back();
     }
 }

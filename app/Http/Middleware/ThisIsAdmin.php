@@ -20,6 +20,6 @@ class ThisIsAdmin
             return $next($request);
         }
 
-        return response()->view('dashboard.index');
+        return back();
     }
 }

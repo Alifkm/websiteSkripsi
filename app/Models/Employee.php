@@ -39,8 +39,8 @@ class Employee extends Model
        });
    }
 
-   public function position(){
-    return $this->belongsTo(PositionType::class, 'position_type_id');
+    public function position(){
+        return $this->belongsTo(PositionType::class, 'position_type_id');
     }
 
     protected $fillable =['position_type_id', 'name','phone', 'email', 'age', 'gender', 'address'];
